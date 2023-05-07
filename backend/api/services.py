@@ -1,11 +1,12 @@
 from stl import mesh
+import io
 import numpy as np
 
 
 def diff_meshes(mesh1, mesh2):
 
-    healthy_blisk = mesh.Mesh.load(mesh1)[1]
-    damaged_blisk = mesh.Mesh.load(mesh2)[1]
+    healthy_blisk = mesh.Mesh.from_file(mesh1)
+    damaged_blisk = mesh.Mesh.from_file(mesh2)
 
     healthy_idx = 0
     damaged_idx = 0
@@ -30,5 +31,4 @@ def diff_meshes(mesh1, mesh2):
     diff_mesh = mesh.Mesh(np.zeros(vector_array.shape[0], dtype=mesh.Mesh.dtype))
     diff_mesh.vectors = vector_array
     diff_mesh.points = point_array
-    vertices = diff_mesh.vectors.reshape(-1, 9).astype(np.float32)
-    return vertices.tobytes()
+    return diff_mesh
