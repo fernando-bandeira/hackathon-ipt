@@ -1,5 +1,4 @@
 from stl import mesh
-import io
 import numpy as np
 
 
